@@ -1,0 +1,28 @@
+(gcc 5.3.0 i686-pc-cygwin)
+1. 01.cpp中若std_lib_facilities.h未被#include，则编译g++ --std=c++11 01.cpp出现错误: 'cout' was not declared in this scope
+2. 01.cpp中若#include不存在(可能是拼写错误)的头文件，则编译g++ --std=c++11 01.cp出现严重错误: No such file or directory
+3. 01.cpp中若cout << "Hello, World!\n";漏掉后面一个"，则编译g++ --std=c++11 01.cpp出现一警告，一错误，内容均为: missing terminating " character
+4. 01.cpp中若将output operator <<写为<，则编译g++ --std=c++11 01.cpp出现错误: no match for 'operator<'
+5. 01.cpp中若将cout << "Hello, World!\n";中的双引号"均改为单引号'，则编译g++ --std=c++11 01.cpp出现警告: character constant too long for its type，运行./a.exe结果不正常
+6. 01.cpp中若将cout << "Hello, World!\n";中的;漏掉，则编译g++ --std=c++11 01.cpp出现错误: expected ';' before 'return'
+7. Terms: 
+   // 读作slash, slash,用来引导注释，一行内所有位于//之后的东西都是注释
+   << 输出运算符(output operator), 将其后的内容输出至cout标准输出流(character output stream)
+   C++ 一种程序设计语言，++为C语言中的递增运算符
+   comment 注释用来说明该程序的预期，并提供不能由代码表达出来的信息
+   compiler 编译器将程序由人类可读的形式转换为机器可以理解的内容，编译器也是一种程序
+   compile-time error 由编译器发现的错误，在编译过程中出现
+   cout 字符输出流(Character OUTput stream)为标准输出流
+   executable 计算机可运行的程序
+   function 函数，给一串指令一个名字，让计算机按照编写的顺序执行它们
+   header 头文件，由#include引入的文件，通常有一后缀.h，包含引入它的cpp文件所用的一些内容的定义
+   IDE 集成开发环境(integrated development environment)，通常包含具有语法高亮的编辑器以及一些帮助调试、编译、运行的工具
+   #include 用来引入文件，并使用该文件中包含的内容
+   library 包含声明的代码，可由#include引入来使用
+   linker 连接器，用来连接目标代码(object code)
+   main() 每一个C++程序都必须具有的函数，程序从这里开始运行
+   object code 由编译器编译源代码生成，可供连接器连接的中间代码
+   output 输出，通过执行程序产生
+   program 程序，一种处理问题的方式，通过精确地描述操作步骤，让计算机完成一定的任务
+   source code 源代码，由人书写，可经编译器编译，连接器连接后变成计算机可执行的程序，一般对人来说是可读的(能够理解)
+   statement 语句，C++程序的一部分，用来指定某一动作(#include 除外)

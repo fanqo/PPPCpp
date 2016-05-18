@@ -1,0 +1,8 @@
+1. 03.cpp中int double = 0;编译时出现错误: expected unqualified-id before ‘=’ token 改为 int bool = 0;出现同样的错误，改为double int = 0;出现同样的错误，改为double 2d = 0;编译时出现错误: expected unqualified-id before numeric constant 改为int 2d = 0;出现同样的错误，改为int <d = 0;编译时出现四个错误:
+    ‘int’ is not a template
+    ‘d’ was not declared in this scope
+    declaration does not declare anything [-fpermissive]
+    expected primary-expression before ‘int’
+改为int >d = 0;编译时出现错误: expected unqualified-id before ‘>’ token 改为int (d = 0;编译时出现错误: ‘d’ was not declared in this scope 改为int )d = 0;编译时出现错误: expected unqualified-id before ‘)’ token 改为int !d = 0;编译时出现错误: expected unqualified-id before ‘!’ token 改为int @d = 0;编译时出现错误: stray ‘@’ in program 改为int #d = 0;编译时出现错误: stray ‘#’ in program 改为int $d = 0;编译没有问题，运行$d = 3; cout << $d;也没有问题，改为int %d = 0;编译时出现错误: expected unqualified-id before ‘%’ token 改为int ^d = 0;编译时出现错误: expected unqualified-id before ‘^’ token 改为int &d = 0;编译时出现错误: invalid initialization of non-const reference of type ‘int&’ from an rvalue of type ‘int’ 改为int *d = 0;编译时没有问题，运行*d = 3; cout << *d;出现问题: Segmentation fault (core dumped)
+2. 06.cpp有个bug，若两数字相同且大于第三个数字，排序会输出两遍，与Stroustrup的要求不同，这里是从大到小排
+

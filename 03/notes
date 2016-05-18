@@ -1,0 +1,38 @@
+(g++ (GCC) 5.3.0)
+1. 将一类型错误的值赋给变量，如将整数赋给string变量则出现错误: conversion from ‘int’ to non-scalar type ‘std::string {aka std::basic_string<char>}’ requested
+2. 输入(cin >> 读取的内容)由空白(空格、换行、制表符)隔开
+3. 输入(cin >> 读取的内容)类型不正确时该值被丢弃(整数、浮点数可作为string型来输入)，多余的输入也被丢弃。int型变量的值被丢弃后会自动赋值为0(或其它随机数)
+4. 04.cpp中int age = -1;在g++ (GCC) 5.3.0编译后通过cin给age输入不正确类型的值，age被赋值为0，而不是-1
+5. 05.cpp中cout << "Hello, " << first << " " << second <<'\n';语句first和second中间应为" "，而不是Stroustrup写的单个引号"
+6. 10.cpp中sqrt()对int型可用，而不是像Stroustrup说的sqrt()对int无定义，cin可将输入的浮点数(如25.6)转换成整形(25)
+7. 11.cpp中若string name = first+' '+second;语句中两单引号之间没有空格，出现错误: empty character constant
+8. 13.cpp中若将同一变量(如string s)初始化两次，则出现一错误(error): redeclaration of ‘std::string s’，一注意(note): ‘std::string s’ previously declared here
+9. 14.cpp中string previous = " ";可换为 string previous = "";即两双引号之间可以没有空格
+10. 16.cpp在编译时提示有三个错误: 
+    ‘STRING’ was not declared in this scope 
+    ‘cOut’ was not declared in this scope
+    ‘S’ was not declared in this scope
+将这三个错误一一改正完后出现提示libcmain.c:39: undefined reference to `WinMain@16'，并有错误: ld returned 1 exit status，继续修改，将int Main()改为int main()后编译并运行成功
+11. 17.cpp中x, y, z使用前均未初始化，编译时不会出现问题，运行结果为: x: 6.89759e-308, y: 6.89759e-308, z: 2
+12. 对比18.cpp和20.cpp(20.cpp中初始化用的是universal and uniform initialization方式)，20.cpp编译时会出现警告: narrowing conversion of ‘i1’ from ‘int’ to ‘char’ inside { } [-Wnarrowing] 
+13. Terms:
+    assignment 赋值，给变量一新值
+    cin 标准输入(Character INput)
+    concatenation 字符串连接，将字符串串在一起
+    conversion 转换，将变量从一种类型变为另一种类型
+    declaration 声明，是一个语句，赋予对象(object)名称
+    derement 递减，每次减1
+    definition 定义，是一个声明，为对象分配内存
+    increment 递增，每次加1
+    initialization 初始化，给变量一初始值，初始化时变量前面有类型
+    name 名称，对象(object)的标签，通过它来使用对象
+    narrowing 将存储长度大的对象转换成存储长度小的对象
+    object 一块具有类型属性的内存
+    operation 运算，对对象的处理
+    operator 运算符，
+    type 类型，它定义了对象可赋的值和可运行的运算
+    type safety 类型安全，类型转换时没有信息流失
+    value 值，赋给对象的具体内容
+    variable 变量，有名称的对象
+    
+
