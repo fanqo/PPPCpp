@@ -1,0 +1,15 @@
+1. 06.cpp中:
+    if (s.size() == 1) {
+      for (int i = 0; i < spell_outs.size(); ++i)
+	if (i == stoi(s))
+	  cout << "spelled-out value for " << s
+	       << " is " << spell_outs[i] << '\n';
+    } else {
+第一个if后面的花括号"{"必须要有，否则else会与第二个if相匹配，这是著名的"悬挂else"错误(金阳语)
+2. 13.cpp中vector<char> primes(100+1);不能写为vector<bool> primes(100+1);因为vector对bool型的处理和对其它类型的处理好像不同
+3. 14.cpp中primes.push_back('t');不能写为primes[i] = 't';否则程序运行时出现错误:
+   terminate called after throwing an instance of 'Range_error'
+     what():  Range error: 0
+     Aborted (core dumped)
+4. 16.cpp三个for语句中int i = 0;不能写为int i;即要对控制变量初始化，
+

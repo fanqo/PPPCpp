@@ -1,0 +1,90 @@
+1. 01.cpp在编译时出现两个错误:
+   assignment of read-only variable ‘pi’
+   ‘r’ was not declared in this scope
+2. 03.cpp在编译时出现警告而非错误: narrowing conversion of ‘(d / (double)i)’ from ‘double’ to ‘int’ inside { } [-Wnarrowing] 最后一个i2 = d/i;结果是1.25而不是Stroustrup写的i2 == 1
+3. 05.cpp在运行时输入数字和字母之间不必有空格，即25i和25 i均可
+4. 11.cpp中若将int i = 0;改为int i;即只定义而不初始化，编译器(gcc (GCC) 5.3.0)将其自动初始化为2673836(Target: i686-pc-cygwin)，若将int i = 0;语句去掉，编译时出现错误: ‘i’ was not declared in this scope
+5. 15.cpp中若将square()的定义放在int main()函数定义之后，即：
+    #include "../std_lib_facilities.h"
+    int main()
+    {
+       for (int i = 0; i < 100; ++i)
+       cout << i << '\t' << square(i) << '\n';
+       return 0;
+    }
+    
+    int square(int i)
+    {
+      int sum = 0;
+      for (int v = 0; v < i; ++v) sum = sum+i;
+      return sum;
+    }
+编译时出现错误: ‘square’ was not declared in this scope
+6. Review:
+   1. computation是指程序读入一些输入，产生一些输出
+   2. input指对电脑程序的输入，如键盘输入、鼠标输入、文件数据输入等；output指电脑程序的输出，如输出的显示屏、输出到文件等
+   3. 程序员要记住的三点为: 正确、简单、效率
+   4. 表达式对一组操作数进行计算，得到一个值
+   5. 表达式后面没有分号";"，语句以分号结束。有一种语句叫做空语句，啥也不做。
+   6. 一个变量的lvalue，是指具有该变量名的对象，而rvalue是指具有该变量名的对象的值。赋值号"="及复合赋值号(如"*="等)左侧需要lvalue。赋值号的作用是将赋值号右侧的值放入赋值号左侧的变量的内存，故其右侧需要的是值，左侧需要的是对象。
+   7. 常量表达式(constant expression)指的是仅由常量组成的具有整数值的表达式。
+   8. literal指的是仅有字面意义的表达式，也就是其名字即其意义，非变量或符号常量
+   9. 符号常量(symbolic constant)是指被初始化后不能够再被赋与新值的具有名字的对象。
+   10. magic constant指的是没有显著意义的literal表达式。
+   11. 可用于整数和浮点数的运算符有：+ - * / < <= > >= << >> == != 等
+   12. 求余%只能用于整数，不能用于浮点数
+   13. 可用于字符串的运算符有: + << >> == > < >= <=等
+   14. 通过与常量进行对比进行选择时一般是switch语句而非if语句
+   15. switch语句的限制有: (1) switch后面的值只能为整数、字符、或枚举类型，不能为字符串；(2) case后面的label只能为常量表达式；(3) 不能以同一个值作为case label
+   16. for循环头一行括号内有三个部分，一是初始化变量，指出循环开始时循环变量的值，二是选择条件，即满足什么样的条件时才进行循环，三是每一循环后进行的运算，主要用来使循环达到终止条件。
+   17. 一般情况下用for循环，因为从for循环的第一行就可以整体看出控制循环的所有量。
+   18. 可将char类型的变量转换为int型来打印其数值。
+   19. 用char foo(int x)来定义函数是指定义一个名为foo的函数，其参数为int型，返回值为char型。
+   20. 应该定义函数的情况为: (1) 将运算从逻辑上分开；(2) 通过将运算命名，使得程序表达更清楚；(3) 在程序的不同部分使用该函数； (4) 便于测试
+   21. 可用于int而不能用于string的操作有: - % sqrt() ++ -- +=等
+   22. 可用于string而不能用于int的操作有: (暂未知)
+   23. vector中第3个element的index为2
+   24. for循环第一行括号中由":"分隔循环变量和vector，如对vector<int> i = {...};
+for (int x : i) { ....}来对vector中每一element操作
+   25. vector<char> alphabet(26);定义了一个名为alphabet的vector，alphabet有26个element，每个element类型为char
+   26. push_back()将一值放到vector里面，vector最后一element的后面再加一值
+   27. member函数size()返回vector的长度，即vector中element的个数，member函数begin(), end()用法不明
+   28. 当需要对一组数据进行操作时可以使用vector，比如电话号码的列表、读过的书的列表、足球队员的列表等等，这种需求量很大又无处不在，故vector很有用。
+   29. 可用sort()函数来对vector的element进行排序，如对vector<int> v的element进行排序sort(v)
+7. Terms:
+   abstraction 使用工具时将不需要的细节隐藏在一个方便通用的接口下。
+   begin() 
+   computation 对一些输入进行操作得到一些输出
+   conditional statement 选择语句，判断条件是否满足
+   declaration 声明，赋予对象一个名称，是一个语句
+   definition 定义，为对象分配内存，是一个声明
+   divide and conquer 将一个大问题分成许多小问题。通过解决小问题来解决大问题。
+   else 与if语句放在一起用，若if后面的条件不满足时执行else下的语句
+   end() 
+   expression 表达式，对操作数进行运算，得到一个值
+   for-statement 循环语句的一种，其结构为 for ( ; ;  ) {}
+   range-for-statement 用来对vector里面的element进行循环，具有结构 for ( : ) {}
+   function 函数，将一组语句组合到一起，并给予一个名称
+   if-statement 选择语句的一种，判断if后面的条件是否满足，满足则执行条件后的语句
+   increment 递加，每次加1
+   input 输入，给程序以备处理的数据或信号
+   iteration 迭代，同样的操作多次执行(操作的数据不同)
+   loop 循环，迭代的代码
+   lvalue 对一变量来说，是指具有该变量名的对象
+   member function 对一vector v来说，用v.function()方法来使用的function
+   output 输出，程序对输入处理后产生的数据或信号
+   push_back() 将值放入一vector里面，放的位置在vector最后一element后面，该值在放入后成为vector的最后一个element
+   repetition 重复，多次进行
+   rvalue 对一变量来说，指的是对应于该变量名的对象的值
+   selection 选择，对不同候选值进行挑选，可用if语句或switch语句
+   size() 一vector型变量的member function，用来计算vector的长度，即vector中element的个数
+   sort() 可用来对vector中的element进行排序，返回排好序的vector
+   statement 语句，包括表达式语句、声明等
+   switch-statement 选择语句的一种，和case放在一起使用，具有结构 switch ( ) { case : ; ... }
+   vector 向量，同一类型数据的列表
+   while-statement 循环语句的一种，具有结构 while ( ) {  }
+
+
+
+    
+
