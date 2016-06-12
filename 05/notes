@@ -1,0 +1,59 @@
+1. 01.cpp中:
+   int s1 = area(7;编译时出现错误: expected ‘)’ before ‘;’ token
+   int s2 = area(7)编译时出现两个错误，一个注意: too few arguments to function ‘int area(int, int)’	expected ‘,’ or ‘;’ before ‘}’ token	note: declared here
+   Int s3 = area(7);编译时出现错误: ‘Int’ was not declared in this scope
+   int s4 = area('7);编译时出现一个警告，三个错误: warning: missing terminating ' character	missing terminating ' character		expected primary-expression before ‘}’ token	expected ‘,’ or ‘;’ before ‘}’ token
+2. 02.cpp中:
+   int x0 = arena(7);编译时出现错误: ‘arena’ was not declared in this scope
+   int x1 = area(7);编译时出现一个错误，一个注意: too few arguments to function ‘int area(int, int)’	note: declared here
+   int x2 = area("seven", 2);编译时出现一个错误，一个注意: invalid conversion from ‘const char*’ to ‘int’ [-fpermissive]	note:   initializing argument 1 of ‘int area(int, int)’
+   int x4 = area(10, -7);编译时没有错误，但显然输入有误，宽度不能为负
+   int x5 = area(10.7, 9.3);编译时没有错误
+   char x6 = area(100, 9999);编译时没有错误
+3. 03.cpp中，int f函数定义，语句int area2 = framed_area(1, z);中framed_area函数的第一个参数为1，一定会触发int frame_area中的error语句。
+4. 04.cpp中，main()函数里只有第一个error()语句执行了，并产生了一个error: Just a test!这一个error被第一个catch语句捕获(编译完该程序生成一a.exe，执行a.exe，然后echo $?即可看到a.exe的返回值，这里为1,故第一个catch里面的语句执行了)。将第一个catch中的cerr << "error: " << e.what() << '\n';注释掉，编译运行，结果为Please enter a character to exit即说明error()语句只负责产生一个error，并不将该error输出至终端，得由cout或cerr将该错误类型输出。main()函数中有两个error语句，catch捕获并输出的为第一个，说明程序遇到error即执行完毕，跳出主程序或语句块。
+5. Review:
+   1. 四种主要类型的错误为: compile-time error, link-time error, run-time error, logic error 由它们的名称可以看出，compile-time error是在编译程序时由编译器发现的错误，有语法错误、书写错误等；link-time error是在链接程序时由链接器发现的错误；run-time error是程序在运行时出现的错误，有由计算机发现的错误、库发现的错误等；而logic error是指程序可以运行，但结果不对，程序的逻辑有问题。
+   2. 在学生程序中可忽视的错误一般为run-time error 因为可以很方便地调用error()函数来对这些错误进行处理；学生程序要使用较复杂的功能一般调用他人写的函数，而这些函数很有可能已经有处理错误的方法了
+   3. 一个项目要保证：a. 对所有正确的输入都能产生想要的结果；b. 对不正确的输入要给出合理的信息指出错误； c. 不需要担心功能失常的硬件； d. 不需要担心功能失常的系统软件； e. 发现错误后可以终止
+   4. 消除错误的方法: a. 检查变量是否都已初始化； b. 检查表达式语句是否都以;结束，不该用;的地方是否用了； c. 检查vector是否越界； d. 注意区分大小写...
+   5. 为什么讨厌debugging呢? 发现不了错误就懊恼，发现了简单的错误就更懊恼，最重要的是不知道程序中还有没有严重的错误
+   6. 语法错误指的是没有按照程序的规则来写代码。如: int s = area(7;	Int s = 0;	string s = "blabla;	cin << x;	string s = "hello"
+   7. 类型错误指的是使用的类型与声明的类型不匹配。如: int x; x = "blabla";    int area(int, int); int x0 = arean(8);     int area(int, int); int x0 = area("bla", 8);	vector<int> v; v.push_back("bla");	cout << s;
+   8. linker error 是指在链接时，由链接器发现的错误，主要用来确定函数、变量等只定义了一次，且使用时类型要匹配(注意，函数未定义而使用，是compile-time error)。如: int x; double x;    double area(int, int); int x = area(7, 8);   
+   9. logic error 是指程序可以进行，但进行结果不对。如: if (x < y) cout << x << " is larger than " << y << '\n';      
+   10. 可能导致程序产生错误的源头有: a. 程序的用途不明确； b. 程序没写完； c. 未预料到的参数或输入； d. 变量初始化不合适
+   11. 可以通过估计来判定一个结果是不是似是而非的，精确的值我们给不出来(精确值应该由程序来给，这是写程序的一个原因)，我们可以大体估计一下值的范围，用它来判定结果是不是合适
+   12. 用调用函数来处理run-time error和用被调用函数来处理run-time error的比较: 用调用函数来处理在我们不想或不能修改被调用函数时比较方便，其难点在于不知道被调用函数参数的类型、范围等信息，且每一次调用被调用函数时都要重写一遍处理错误的代码；用被调用函数来处理的话，有可能被调用函数不知道出错后该干啥，也不清楚自己将会被用在哪，还可能会因错误处理拖慢程序的整体进行速度，特别是对一些小程序而言
+   13. 返回一error value的话首先要对这个值处理两次(被调用函数处理返回什么值，调用函数处理收到这个返回值后该怎么做)；其次有些函数没有多余的值可供返回(如一个函数正常的话返回一个整数，那就不能再用整数当做它的错误返回值)。异常处理的基本思想是将发现错误和处理错误分开，同时保证所有被发现的错误都不会被忽略，函数发现错误后不正常返回，而是抛出一个异常，所有直接或间接调用该函数的代码都会捕捉到这一异常。
+   14. 可用if(cin)来判断上一个输入操作成功与否。
+   15. 若函数遇到一个自己不能处理的错误，它不正常退出而是抛出一个异常，该异常能被任何直接或间接调用本函数的函数捕获。对异常的捕获要用try语句块来实现，而对异常的处理由catch语句块来实现。
+   16. 对一vector v来说，v.size()是其长度，而vector的index是从零开始的，所v.size()要比最大的index大1，所以v[v.vsize()]会出现range error。这样调用会产生一个range error
+   17. pre-condition指的是函数的参数要满足的条件，而post-condition是指函数的返回值要满足的条件。比如一个函数的参数是vector，而该参数至少要有50个元素，就可以用pre-condition: if(v.size() < 50) cout << "Not enough elements"; 而若要返回值是一个两位整数，则可组post-condition: if ( !(a > 9 && a < 100) ) cout << "Return value is not of two figures << '\n';
+   18. 不测试pre-condition的情况有: a. 没人会给出错误的参数；b. 测试的话会拖慢程序的进行速度； c. 太复杂了不容易测试。最好将在注释中写清楚pre-condition。
+   19. 不测试post-condition的情况有: (个人认为一般不用进行post-condition测试，可以把精力放在pre-condition和计算上，只要保证输入和运算都是正确的，其结果也应该是正确的，当然这可能很困难，而这困难应该就是用post-condition的地方)
+   20. 调试的步骤大体为: a. 让程序能通过编译； b. 让程序能通过链接； c. 让程序得到应该得到的结果。
+   21. 在注释中可以列出该程序的目的、该程序对输入的需求、该程序有哪些地方不足等，亦即写出code不能明显地表达出来的东西，而这些正是在程序出问题时我们要考虑的，所以注释可以有助于调试
+   22. 测试和调试的不同在于: 调试是我们知道了有问题，寻找问题的源头；而测试是我们想要知道还存在不存在问题。测试用一大组选择好的输入来执行程序，并将执行结果与预期结果进行对比，而调试是发现执行结果与预期结果不符，我们来找出原因。
+6. Terms:
+   argument error 参数错误，一般指调用函数时，给出的参数与函数参数的需求不符(类型不符)
+   assertion 断言，对不变式(invariant)的声明
+   catch 捕获，获得一个被被调用函数抛出的异常，并给出相应的操作。
+   compile-time error 编译时错误，由编译器在编译源代码时给出的错误
+   container 容器，指一组数据("collection of data")
+   debugging 调试，发现并移除错误
+   error 错误，程序不能运行或运行的结果不正确，主要有: compile-time error, link-time error, run-time error, logic error
+   exception 异常，处理错误的一种机制，将发现错误与处理错误两个过程分开并保证被发现的错误不会被忽略。被调用函数抛出信号也称作异常。
+   invariant 不变式，一直要满足的条件
+   link-time error 链接时错误，由链接器在链接目标代码时发现的错误
+   logic error 逻辑错误，这种错误一般程序能够运行，但运行的结果不正确，编写程序的逻辑出现了错误
+   post-condition 后置条件，函数的返回值(或部分返回值)要满足的条件
+   pre-condition 前置条件，函数的参数要满足的条件
+   range error 范围错误，一般指对数据的使用超出了其可用的范围，如数组越界、使用超过该计算机整数范围的整数
+   requirement 要求，函数对其参数的限制条件
+   run-time error 运行时错误，程序编译完运行时出现的错误
+   syntax error 语法错误，违反语言规范产生的错误
+   testing 测试，给定一大组输入来执行程序，并将执行结果与预期结果运行对比
+   throw 抛出，函数对某些条件运行响应，给出一个信号
+   type error 类型错误，使用参数或变量时与该参数或变量的类型不符，如: int x; x = "blabla";
+   

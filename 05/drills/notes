@@ -1,0 +1,25 @@
+1. 01.cpp编译时出现错误: ‘Cout’ was not declared in this scope
+2. 02.cpp编译时出现两个错误和一大堆说明，两个错误为: missing terminating " character	no match for ‘operator<<’ (operand types are ‘std::ostream {aka std::basic_ostream<char>}’ and ‘void’)
+3. 03.cpp编译时出现三个错误和一个警告: stray ‘\’ in program	 warning: missing terminating " character	  missing terminating " character  ‘n’ was not declared in this scope
+4. 04.cpp编译时出现错误: ‘success’ was not declared in this scope
+5. 05.cpp编译时出现两个错误: conversion from ‘int’ to non-scalar type ‘std::string {aka std::basic_string<char>}’ requested	cannot convert ‘std::string {aka std::basic_string<char>}’ to ‘int’ in assignment
+6. 06.cpp编译时出现两个错误，错误类型一致，同为: no match for call to ‘(Vector<int>) (int)’
+7. 07.cpp编译时出现错误: ‘cond’ was not declared in this scope
+8. 08.cpp编译没有问题，问题出在逻辑上，if (c)在c为真(true)时执行，c为false故执行else后面的cout << "Fail!\n";
+9. 09.cpp编译运行都没问题，问题还是出在逻辑上，这里c为false，故不执行if (c) 后面的语句
+10. 10.cpp中s = "ape"所以s == "fool"为假(false) 从而cout << "Success!\n";不执行
+11. 11.cpp编译时出现一个错误和一堆说明，错误为: no match for ‘operator<’ (operand types are ‘std::ostream {aka std::basic_ostream<char>}’ and ‘const char [10]’)
+12. 12.cpp编译时出现两个错误和一堆说明，两个错误为: could not convert ‘std::operator+(const std::basic_string<_CharT, _Traits, _Alloc>&, const _CharT*) [with _CharT = char; _Traits = std::char_traits<char>; _Alloc = std::allocator<char>](((const char*)"fool"))’ from ‘std::basic_string<char>’ to ‘bool’	no match for ‘operator<’ (operand types are ‘std::ostream {aka std::basic_ostream<char>}’ and ‘const char [10]’)
+13. 13.cpp编译时没有问题，v.size()为5故0 < v.size()一直为真，for循环不会终止。
+14. 14.cpp编译时没有问题，v.size()为5而for循环中对i的判断从0开始，故cout << "Sucess!\n";会执行6次，分别为i=0, 1, 2, 3, 4, 5时
+15. 15.cpp编译没有问题，运行输出6个字符: Succes
+16. 16.cpp编译时出现错误: ‘then’ was not declared in this scope
+17. 17.cpp中c类型为char其范围没有类型为int的x大，而2000超出了c类型的范围，故char c = x;转换之后有信息丢失，即int(c)不再等于2000(实际这里为-48，其为2000 % 512 - 512得出，具体是不是这么一个转换规律，存疑)，故cout << "Success!\n";不会被执行
+18. 18.cpp编译没有问题，运行会成功。s中只有10个字符，\n代表的是一个字符。
+19. 19.cpp编译时出现两个错误: missing template arguments before ‘v’	‘v’ was not declared in this scope 即使将vector v(5);改为vector<int> v(5);也不会多次执行cout << "Success!\n";因为该语句在for循环语句块外(注意for (int i=0; i<=v.size(); ++i);最后的分号，使得for循环的主体是一个空语句)
+20. 20.cpp编译没有问题，其中i一直为0，故i<10一直为真，所以程序会一直运行下去，完全看不出这程序原本的意图
+21. 21.cpp编译没有问题，运行出错: Floating point exception (core dumped) 原因可能为0作除数
+22. 22.cpp编译时出现错误: ‘std::string {aka std::basic_string<char>}’ is not a template
+23. 23.cpp编译时出现两个错误，两错误类型相同，均为: ‘j’ was not declared in this scope
+24. 24.cpp编译时没有问题，问题在于if ( d=2*x+0.5 )条件d=2*x+0.5是将2*x+0.5赋值给d这个变量，等号左右两边类型相同，所以会赋值成功，即d=2*x+0.5为真，故程序会输出Success!(比较用==双等号，而不是=等号)
+25. 25.cpp编译时出现一个错误和一堆说明，错误为: no match for ‘operator<<’ (operand types are ‘std::istream {aka std::basic_istream<char>}’ and ‘const char [9]’)

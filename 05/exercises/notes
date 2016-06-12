@@ -1,0 +1,9 @@
+1. 对比04.cpp和05.cpp，发现使用try和catch可以防止出现core dumped提示:
+   terminate called after throwing an instance of 'std::runtime_error'
+    what():  Temperature can not below -273.15 degrees Celsius
+   Aborted (core dumped)
+并且不会生成*.stackdump文件
+2. 由06.cpp中的ftoc()函数可以看出constexpr 可以由表达示来赋值。可用0摄氏度和32华氏度来做估计。另: error()函数中不知怎样将变量当做参数。
+3. 09.cpp不能满足要求，不知如何来判断一个数是不是越界了。
+4. 由11.cpp可以看出，整数越界(正整数加上一个数变为负整数)不会抛出一个异常。
+5. 13.cpp不能完成任务，不知道srand()函数和randint()函数的用法是否正确，但每一次生成的vector v均为{0, 1, 8, 5}
