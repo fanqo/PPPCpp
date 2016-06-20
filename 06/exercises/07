@@ -1,0 +1,20 @@
+Expression:
+        OrTerm
+	"!" Expression
+	"~" Expression
+
+OrTerm:
+        EorTerm
+	OrTerm "|" EorTerm
+
+EorTerm:
+        AndTerm
+	EorTerm "^" AndTerm
+
+AndTerm:
+        Primary
+        AndTerm "&" Primary
+
+Primary:
+        Integer
+	"(" Expression ")"

@@ -1,0 +1,53 @@
+1. 01.cpp只实现了加、减运算，如果输入乘或除，如8*9 或30/3，其结果都是一样的，这里是Result: 2673836 也就是说res被始化为2673836，没看出这个数有啥特殊含义，重新编译01.cpp再运行输入8*9得到的还是Result: 2673836
+2. 02.cpp中error("bad expression");的作用是?
+3. 03.cpp是6.7节的calculator01.cpp，由Stroustrup提供的"Complete collection of code fragments for the 1st edition (revised)"压缩包Programming-code.zip中Chapter06文件夹下chapter6.7.cpp修改而来
+4. 04.cpp为书中最终的代码，可由输入1+2*3;为例来看其运行: 程序由main()函数开始，首先将val赋值为0，判断cin是否为真(由此可以看出，cin的初始值应该为true，否则程序不能进入while循环)，将ts.get()的返回值赋给Token t，ts.get()为ts的member函数，而ts的类型为Token_stream，ts.get()由Token Token_stream::get()来定义，在Token_stream::get()函数中，full的初始值由class Token_stream来设定，为false，故将1读入Token_stream::get()函数的ch中，由switch选择ch的值对应的case: 将ch放回cin中，这由cin的member函数putback()来实现(具体实现细节未知，应该和Token_stream::putback()函数的实现类似)，再将该值读入val变量并返回一个Token{'8', 1} (先求值再返回)；main()函数中Token t的值为{'8', 1}，判断t.kind (由class Token的声明可知，这里为'8')，将t的值{'8', 1}放回Token_stream ts中，这由ts的member函数Token_stream::putback()来实现，实现完成后ts中buffer值为{'8', 1}，full值为true；然后main()函数中将expression()函数的值赋给val；expression()函数中，首先将term()函数的值赋给double left，而term()函数首先将primary()函数的值赋给term()函数中的double left，先看primary()函数，将ts.get()的值赋给Token t，此时ts中full为true，buffer为{'8', 1}(由main()函数的ts.putback()函数来设定)，故而primary()函数中Token t值为{'8', 1}(由Token_stream::get()函数中的return buffer来实现，在此之前ts中的full被设为false)；由switch()语句选择t.kind(这里为'8')对应的case，从而得primary()函数的返回值为t.value，为1；则term()函数中double left值为1；term()函数中再由ts.get()读入一Token并赋给变量t，此时的ts，full为false，buffer为{'8', 1}，由其member函数get()，读入一字符(这里为+)然后由switch语句选择其对应的case，则可得term()函数中Token t的值为{'+', }选择t.kind对应该的case为default，则将t({'+', })放回ts(此时ts中buffer为{'+', }，full为true)，并给出left的值1为返回值；则expression()函数中left值为1，然后由ts的member函数get()赋值给Token t，即将{'+', }赋给t(此时ts中full为false，buffer为{'+', })，选择t.kind(这里为+)对应该的case，将1+term()赋给left，即将7(1+6，1+2*3)赋给left(此时ts中buffer为{';', }，full为true)，然后expression中t值赋为{';', }(此时ts中buffer仍为{';', }，full为false)再次选择t.kind对应的case，将{';', }放回至ts(此时ts中buffer仍为{';', }, full为true)，并返回left的值7；main()函数中val值赋为7；由于上一次cin成功读入，故再次执行while循环Token t被赋值为{';', }(此时ts中full为false，buffer仍为{';', })，选择t.kind(';')对应的case，输出val的值7；然后将expression()的值赋给val，expression()首先将term()的返回值赋给double left，term()首先将primary()的返回值赋给double left，而primary()首先由ts的member函数get()赋值给Token t，输入其它任意字符，如d，则ts.get()抛出错误"Bad token"，由catch捕获，若输入q，则primary()抛出错误"primary expected"，由catch捕获。
+5. Review
+   1. 编程始于问题，也就是说先有问题，然后希望通过程序来帮助解决这一问题。如果程序不能解决该问题的话，那它对我们的用途就很小了，这样来说对问题的理解就很重要了，它可以指导我们来编写正确的程序，在分析阶段让我们清楚地知道要编写什么样的程序，设计阶段帮助我们给出一整体框架。
+   2. 该计算器程序要能够使得我们输入表达式，如1+2，通过计算它能够给出我们正确的值，还要能够处理运算优先级，以及括号里面的项先计算。
+   3. 将一个问题分成可处理的小一些的部分: 首先看自己是否知道一些工具、库啥的能够解决一小部分问题；然后看可被独立描述的部分是否有解决方法。
+   4. 一般来说，开始时我们不会很透彻地理解遇到的问题，首先写一个小一些的，功能不完全的程序可以让我们对细节有一些理解，由于它比较容易完成(相对于完全功能的程序来说)，它可以给我们一些信心，同时在完成的它时候可能会纠正我们对问题的一些看法。小一些的程序，相对来说bug会少一些，除错容易一些，也容易维护和理解问题的框架。
+   5. 要的功能越多，程序变得就会越大，越不容易完成，可能会使得编程者丧失耐心，同时因为程序变大，可能引入更多的bug，使得除错更困难一些，代码更难维护。
+   6. 软件开发有三个主要的阶段: 分析，了解想要解决的问题，并根据自己的理解描述一下该程序要解决的问题有哪些；设计，给出程序的大体框架，要实现哪几部分，这些部分之间又要怎样联系；实现，写程序、除错、测试。
+   7. 用例(use case)是指在程序开发的早期输入给程序的一些输入示例，它说明了程序至少能做的事情。
+   8. 测试主要是用来排除一些逻辑错误，给定输入，将程序的输出与预期进行比较，来判断程序的逻辑是否有问题。
+   9. Term, Expression, Number, Primary的区别: Number只是浮点数，Primary包括Number和由括号括起来的表达式，Term包括Primary以及由Term, Primary组成，由*或/或%连接的项，Expression包括Term或由Expression和Term组成，中间由+或-连接的项。
+   10. 对(17+4)/(5-1)，17为Number，Number是一个Primary，Primary是为一个Term，Term是Expression，所以17是一个Expression，同理4是一个Expression，同时是一个Term，一个Expression"+"一个Term是一个Expression，所以17+4是一个Expression，"(" Expression ")"为一个Primary，故(17+4)为一个Primary，所以(17+4)也是一个Term，也是一个Expression，同理(5-1)也是一个Primary，也是一个Term和一个Expression，Term "/" Primary为一个Term，所以(17+4)/(5-1)是一个Term，同时也是一个Expression。
+   11. expression()，term()，primary()的存在是因为C++不能直接地处理Expression，Term，Primary这些概念，而C++能够直接处理浮点数，所以不必构造一个number()函数来处理。
+   12. Token是一串字符，用来表示被认为是一个单元(unit)的东西。
+   13. Grammar描述了输入要遵循的语法，该描述中每一组都是一条grammar rule
+   14. Class是一种用户自定义类型，它被构造出来用来表示编程语言不能直接表示的类型。
+   15. 参照class Token_stream，可以像初始化变量一样来给出member的默认值。
+   16. expression()函数由Token t = ts.get();语句读入一个Token，若该Token为+或-，则使用它，若不为+或-则不使用，所以default中要将该Token放回，否则expression()函数不会用这个Token，其它函数也用不了这个Token了。
+   17. look-ahead是指必须读入多一些输入才能判断如何对当前的输入进行操作。
+   18. putback()将其参数放回流(stream)中，它之所以有用是因为它可以先读入一些内容，然后根据读入的内容进行判断如何操作，如果用不到该部分内容，就可以让其它函数来使用该内容。
+   19. 因为term()项处理的数为浮点数，而%对浮点数无意义，整个程序的其它部分需要的也是浮点数，所以即便term()使用%，其返回值也不能被其它部分使用，所以term()实现%有困难。
+   20. class Token中的两个member一个用来指示输入字符的类型，一个用来指示输入字符的值。
+   21. 将class里面的member分成两部分是因为这样可以将该class与外部的通信与内部的处理分开，明确接口。
+   22. 若Token_stream中有一token在buffer里，则full的布尔值为true，在Token_stream::get()函数中，full若为true，则返回buffer的内容。
+   23. 因为整个calculator程序要预先读入一些输入才能对当前的内容进行操作，所以要多读入一个token，该token刚好又可以用来显示当前val的值(;)，或退出(q)
+   24. 实现一部分程序后就应该测试(test)，以确保后面的程序建立在一个可靠的基础之上。
+   25. 用户自定义类型(user-defined type)就是一个class，它可以用来表示编程语言不能直接表示的类型。
+   26. C++中用户自定义类型的结构为class Token { ... }，这样来定义一个类型Token
+   27. 程序库里面的代码一般都经过了很长时间的检验，其运行效率和运行可靠性都有保证。
+6. Terms
+   analysis 分析，理解问题，并根据理解找出和实现的需求
+   class 类，用来定义一些语言本身不包含的类型
+   class member 类成员，类里面的各项
+   data member 数据成员，类成员里除去成员函数(member function)的其它成员
+   design 设计，根据分析给出程序的框架，以及要实现的部分
+   divide by zero 除数为0
+   grammar 给出输入要满足的语法规则
+   implementation 实现，根据分析和设计，写出代码并调试、测试
+   interface 接口，用来完成一部分代码和另一部分代码之间的通信
+   member function 成员函数，类成员中除去数据成员的其它成员
+   parser 根据grammar来读入token的程序
+   private 用来在类中用来隔离实现细节
+   prototype 功能有限的初始版本
+   pseudo code 伪代码，大概地给出代码应该如何编写的草稿
+   public 用来在类中开放出给其它程序部分使用的接口
+   syntax analyzer 同parser，根据grammar来读入token的程序
+   token 一串字符，用来表示可被认为是一个单元的内容
+   use case 程序开发早期给出的一些输入示例
+   
+   

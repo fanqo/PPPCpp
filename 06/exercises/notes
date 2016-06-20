@@ -1,0 +1,5 @@
+1. 03.cpp中，!要有比'*'或'/'更高的优先级，所以它应该归属于Primary规则，不过这样实现起来的方法没有想出来，就折衷一下，在Primary规则和Term规则之间加了一过滤层fact
+2. 04.cpp中，本想用sort()函数来对vector<Name_value> t运行排序，编译过程出现错误，暂时没有能力排除，只好使用遍历手段
+3. 05的内容不是C++源代码
+4. 06.cpp是参考Stroustrup的代码http://stroustrup.com/Programming/Solutions/Ch6/e6-6.cpp写出的。注意return的用法，一函数中若return了一个值，该return语句后面的语句都不再执行。
+5. 07的内容不是C++源代码
