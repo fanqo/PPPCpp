@@ -1,0 +1,9 @@
+1. use.cpp 中 int foo = 7; 要放在 main()函数之外，否则链接时出现错误：
+    Undefined symbols for architecture x86_64:
+      "_foo", referenced from:
+          print_foo() in my.o
+使用 extern 声明的是全局变量
+2. swap_cr() 定义时为 swap_cr(const int& a, const int& b) 将 a, b 均定义为 const reference 从而其函数体内 a = b; b = temp; 不能编译通过。将函数定义均放在 swaps.cpp 中，先由 g++ -std=c++11 -c swaps.cpp 将 swaps.cpp 编译为目标文件；对每一个 swap_??.cpp 文件，由 g++ -std=c++11 swap_??.cpp swaps.o 编译链接为可执行文件
+3. swap_v() 函数并未将参数的值互换，因为局部变量 a, b 只是拷贝了参数的值并未对参数做出回馈。
+4. swap_r(7, 9) 不能编译成功；第二组测试，即 const int cx = 7; const int cy = 9; 使得 swap_r() 不能编译成功: 第三组测试，即 double dx = 7.7; double dy = 9.9; 也使得 swap_r() 不能编译成功。后两组测试均出现错误： no matching function for call to 'swap_r' 说明 int& 对应的变量必须为 int, 且不可为 const int
+
