@@ -1,0 +1,3 @@
+1. 02中需要将Name_pairs成员函数sort换个名字，如nsort，否则编译时出现错误：too many arguments to function call, expected 0, have 1; did you mean '::sort'?
+2. 03中需要在Name_pairs.h中声明bool operator==(...)等，否则编译时出现错误：invalid operands to binary expression ('Name_pairs' and 'Name_pairs')
+3. 06中operator重载时参数为const Book&，这要求 class Book 中将 title(), author()等函数定义为 const，否则编译时会出现错误：member function 'title' not viable: 'this' argument has type 'const Book', but function is not marked const

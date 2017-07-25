@@ -1,0 +1,4 @@
+1. 03.cpp 中使用 int year() {...} 而非 int year() const {...} 编译时出现错误：member function 'year' not viable: 'this' argument has type 'const Date', but function is not marked const. day(), month() 函数同样。
+2. 04.cpp 中若使用 class Year, 则编译时出现错误 invalid operands to binary expression ('basic_ostream<char,  std::__1::char_traits<char> >' and 'Year')  return os << '(' << dd.year().
+3. 04.cpp 若使用 enum class Month 则编译不通过， invalid operands to binary expression ('basic_ostream<char,  std::__1::char_traits<char> >' and 'Month')，与2相同的问题。
+4. 由于要用到9.8中的 ostream& operator<<(ostream& os, const Date& d), 前面几个 drill 中的成员函数 day(), month(), year() 均为 const member function, 即9.7.4引入的内容，故 05.cpp 无新内容。
