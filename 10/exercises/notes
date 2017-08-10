@@ -1,0 +1,7 @@
+1. 02.cpp 中意外漏写 catch (写完try{...}后就终止程序了) 发现编译时会出现错误：
+  “error: expected catch
+  }”
+2. 03.cpp 中 median 的计算参考第4章内容 
+3. 04 内容略，只需将 Reading struct 中加入新成员 suffix, 修改 operator>> 读入 suffix，
+push_back 读入数据前判断一下 r.suffix 即可
+4. 08.cpp 不会将文件的原内容输出，会将空格和换行符吞掉，算不上真正地串联两文件
