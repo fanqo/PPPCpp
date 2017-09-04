@@ -1,0 +1,48 @@
+1. http://stroustrup.com/Programming/ 网站上的 fltk.h 似乎有些问题，应将
+  #include "Fl/Fl_JPEG_Image.H"
+  #include "Fl/Fl_GIF_Image.H"
+改为
+  #include "FL/Fl_JPEG_Image.H"
+  #include "FL/Fl_GIF_Image.H"
+具体修改可参考https://stackoverflow.com/questions/7134049/stroustrups-simple-window-h
+编译时使用： 
+  g++ -std=c++11 -lfltk -lfltk_images 01.cpp Simple_window.cpp Graph.cpp GUI.cpp Window.cpp
+2. Review
+  1. 使用图像因为：1) 图像是有用的； 2) 图像是有意思的； 3) 因为处理图像而存在很多让人感兴趣的代码； 
+4) 图像可以用来展示代码的设计和实现； 5) 图像可以用来引入面向对像； 6) 图像的一些概念很重要
+  2. 对纯数据流的处理可能不太需要图像
+  3. 有了图像对代码的改动可以比较直观的显示出来，图像代码库的设计和实现不是很容易的事，可以从这些实现中
+看到许多有意思的代码
+  4. 可以将窗口(window)理解了一个小的显示屏。
+  5. 本书中和图像有关的功能放在了 Graph_lib 命名空间(namespace) 中
+  6. Window.h 和 Simple_window.h 与窗口有关， Graph_.h 与绘制形状有关
+  7. 最简单的窗口基本上就是一个空白窗口 (可能会有些按钮)
+  8. 最小的窗口？莫非只有一个像素点？不确定
+  9. 窗口标题不在窗口内，而在窗口上部一个栏中，用来显示窗口的名称
+  10. 可由窗口成员函数 set_label 来指定窗口名称 或初始化窗口时指定
+  11. 屏幕坐标以左上角为 (0, 0) 点，向右为 x 轴方向，向下为 y 轴方向，窗口坐标与屏幕坐标相同，
+而数学坐标一般为左下角开始，向右为 x 轴正向，向上为 y 轴正向
+  12. 一些简单的形状有：矩形，多边形，圆形，椭圆等
+  13. 可以窗口的成员函数 attach() 将形状添加至窗口中
+  14. 可用多边形 Polygon 来构造六边形
+  15. 要在窗口中添加文本，可先由 ostringstream 构造出文本，再由 Text 类将其指定为文本并指定其位置，
+再 attach 到窗口中
+  16. 添加图像先构造图像 Image ii {Point, “jpg”}; 再 attach 到窗口中
+  17. 窗口最后要由 wait_for_button 成员函数使其显示出来
+  18. 形状不显示，可能是没有 attach 到窗口中，也可能是形状坐标不在窗口内
+3. Terms
+  color  颜色
+  coordinates  坐标，用来给出像素的位置
+  display  显示
+  fill color  填充颜色，将闭合区域用某一颜色填充
+  FLTK  Fast Light Tool Kit，一图形用户界面库
+  graphics  图像
+  GUI  graphical user interface 图形用户界面，以图像的方式和用户进行交互的接口
+  GUI library  用来处理 GUI 的库
+  HTML  超文本标记语言，浏览器处理用来显示网页
+  image  图像
+  JPEG  一种图像格式
+  line style  线样式，颜色、是否连续(dashed, dotted)等
+  software layer 软件层？
+  window  窗口，用来显示图形、图像，可看作较小的显示屏
+  XML  一种标记语言
