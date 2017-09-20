@@ -1,0 +1,80 @@
+1. 01.cpp 中 constexpr Point x {100, 100}; 编译不成功，显示错误：
+  constexpr variable cannot have non-literal type
+将其改为 Point x {100, 100}
+2. Graph.h 中实际上没有 
+  Line::Line(Point p1, Point p2)
+  {
+      add(p1);
+      add(p2);
+  }
+有的是
+  struct Line : Shape {
+	  Line(Point p1, Point p2) { add(p1); add(p2); }
+  };
+即定义 struct Line 时就把其成员函数 Line 给定义了
+3. draw_lines() 在 Graph.h 中声明，在 Graph.cpp 中定义
+4. struct Color{} 位于 Graph.h 中
+5. 04.cpp 不能被成功编译，出现错误：
+  calling a protected constructor of class 'Graph_lib::Shape'
+Closed_polyline, Polygon 的例子也出现同样的错误
+6. Vector_ref 定义在 Graph.h 中
+7. Review
+  1. 使用 interface 而不是 implementation 可以让我们更关注概念而忽略具体的实现细节，
+同时，当具体实现改变时可以保证现有的代码不变
+  2. 对于一个窗口，只需一个类 Simple_window, 若要有其它形状则再需其它的类，如 
+Rectangle, Lines 等
+  3. 使用图形界面库所需的头文件有 Simple_window.h, Graph.h
+  4. Closed_polyline 定义了封闭的多边形
+  5. 光使用 Line 来定义所有的图形的话是可以，不过会比较繁锁且使得图形的概念不明朗，同时，
+有些图形如 Rectangle 实现起来可能比 Line 还要简单、快速
+  6. Point 的两个参数为其坐标，第一个表示从窗口左上角向右的坐标，第二个为从窗口左上角向
+下的坐标
+  7. Line_style 包含线条的样式，如 solid, dash 等；同时包含线宽
+  8. Color 包含颜色和透明度
+  9. RGB 是一种颜色的表达方式，用红色(Red), 绿色(Green), 蓝色(Blue)的不同混合比例来
+表示不同的颜色
+  10. 两个 Line 可以分别设置不同的属性(颜色等)，而一个含有两条线段的 Lines 只能一起来
+设置属性
+  11. 每一个 Shape 都可以设定颜色
+  12. 5个点定义的 Closed_polyline 有5条边
+  13. 定义了 Shape 而不 attach 到窗口上是看不到的
+  14. Rectangle 的实现方式和 Polygon 的实现方式不同。Polygon 通过添加点，依次在点之
+间连线而格式图形，作一个矩形需要4个点，而 Rectangle 只需2个点或指定1个点和长、宽
+  15. Polygon 和 Closed_polyline 的区别在于 Polygon 不允许构成 Polygon 的线交叉
+  16. 由 Rectangle 的示例可以看出 outline 在 fill 的上层
+  17. 矩形要比其它图形简单(包括三角形)，而且图形库中对它一般都直接支持
+  18. 可用 move() 成员函数在窗口中移动图形
+  19. 用 Text 类用一行文字标记图形
+  20. Text 类可设定颜色、字体和字体大小
+  21. 字体定义了字符的样式和含有的字符。不同的字体能够显示的字符或字符的样式可能是不一样的
+  22. Vector_ref 用来将同一类型的未命名的图形放在一起 (vector 中)
+  23. Circle 定义了1个点(圆心)和半径来构成图形；Ellipse 定义了1个点和2个轴
+  24. 若要显示的文件不是图形，则会显示空白图像？？？
+  25. 可由 set_mask() 成员函数来显示部分图像，set_mask 有3个参数，第一个指示了要显示的
+部分左上角位于原图像中的位置，后2个参数分别指示了要显示部分的宽高
+8. Terms
+  closed shape  闭合图形，图形的终点和起点由线段连接起来
+  color  颜色
+  ellipse  椭圆
+  fill  填充，将一闭合区域填满某一颜色
+  font  字体，含有不同的字符集和字型
+  font size  字体大小
+  GIF  一种图像格式
+  image  图像
+  image encoding  图像解码，将图像由存储格式转换为可见的样式
+  invisible  不可见
+  JPEG  一种图像格式
+  line  线段，两点间直线的一部分
+  line style  线段样式
+  open shape  开放图形
+  point  点，坐标的显示
+  polygon  多边形，多条边组成的图形
+  polyline  多义线，多条线段首尾相连
+  unnamed object  未命名的对象
+  Vector_ref  一种类，用来存放未命名的对象
+  visible  可见
+  
+  
+  
+  
+  

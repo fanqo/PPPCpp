@@ -1,0 +1,10 @@
+1. 01.cpp 中， fl_arc() 函数有6个参数，前2个指定要图形占用的矩形的左上角坐标，中间2个指定
+图形所占用的矩形的宽和高，最后2个指定弧的角度
+2. 01.cpp 中， w, h, p, sa, ea, lp 均定义为 private，在定义构造函数时要将它们全部初始化
+3. 03.cpp 中，要注意 atan 与 atan2 函数的不同之处：atan 返回值位于 [-pi/2, pi/2]之间，
+而 atan2 返回值位于 [-pi, pi] 之间
+4. 04.cpp 中， Point n() 函数的参数若非引用，即 Point n(Rectangle r)，编译时出现错误：
+  call to implicitly-deleted copy constructor of
+        'Graph_lib::Rectangle'
+其它各函数的创建参照函数 n()
+5. 
