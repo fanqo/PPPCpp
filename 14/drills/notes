@@ -1,0 +1,36 @@
+1. 01.cpp 编译后运行输出：
+  Calling virtual function
+  B1::vf()
+  Calling non-virtual function
+  B1::f()
+说明虚拟函数也可在基类中定义(不只是只能声明)
+2. 02.cpp 编译后运行输出：
+  Calling virtual function
+  D1::vf()
+  Calling non-virtual function
+  B1::f()
+D1 类将 B1 类中的虚拟函数覆盖掉
+3. 03.cpp 编译后运行输出：
+  Calling virtual function
+  D1::vf()
+  Calling non-virtual function
+  B1::f()
+d1 是 D1 的对象，D1 基于 B1， 所以 d1 也是 B1 的对象，从而 B1 类的 b1 与 d1 是同一个对象
+4. 04_1 输出：
+  Calling virtual function
+  B1::vf()
+  Calling non-virtual function
+  B1::f()
+04_2 输出：
+  Calling virtual function
+  D1::vf()
+  Calling non-virtual function
+  D1::f()
+04_3 输出：
+  Calling virtual function
+  D1::vf()
+  Calling non-virtual function
+  D1::f()
+5. 05_1.cpp 编译出现错误：
+  variable type 'B1' is an abstract class
+因为，纯虚函数 (pure virtual function) 必须由派生出的类的成员函数来覆盖
