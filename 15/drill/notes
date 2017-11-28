@@ -1,0 +1,4 @@
+1. 01.cpp 中定义 scale 后 Function s1 {...} 不能写为 Function s {...}，否则编译
+报错：
+  redefinition of 's'
+与示例中函数逼近不同，函数逼近中 Function e，e为一局部变量

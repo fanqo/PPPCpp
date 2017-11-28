@@ -1,0 +1,29 @@
+1. 01.cpp 中若为 constexpr Point orig {x_orig, y_orig}; 编译时会报错：
+  constexpr variable cannot have non-literal type
+2. 02.cpp 中若为 Function e {[n](double x) {return expe(x,n);},... 编译时报错：
+  no matching constructor for initialization of
+      'Graph_lib::Function'
+3. Review
+  1. 只有一个参数的函数是指调用该函数时，在函数名后的括号中最多只能给出一个参数的函数（可能会
+有默认值）
+  2. 能由函数描述的数据用曲线表示，不能用函数描述的数据用点来表示
+  3. x/a，x为自变量，a为非零常数，可用x/a来表示一slope
+  4. 抛物线为自变量的二次函数，自变量x的最高次项为x*x项
+  5. Axis x {Axis::x, Point{start_x, start_y},xlength, xlength/x_scale, "xlabel"}
+  6. 函数的默认参数指调用函数在函数名后面的括号中可以输入也可以不输入的参数，对于变化很少的参数
+可以给予默认值
+  7. 将函数加在一起就是对于同一个自变量将对应因变量的值加在一起
+  8. 可用Function的成员函数set_color来定义label和曲线的颜色
+  9. 一个序列趋近一个函数是指当序列的项数越来越多时，该序列的图像与函数的图像越接近
+  10. 在编写代码之前将布局画出来可以在代码运行结果不是我们想要的时方便地找到问题所在
+  11. 首先找出数据的范围，将数据的范围缩放至可以放在窗口中，然后按同一缩放比例将数值均缩放
+  12. 为了缩放数据时少一些尝试和错误，可将缩放所需的量定义为变量，然后有已知的量求出未知变量的值
+  13. 输入数据若有格式，可以避免数据输入的不完整
+  14. 
+4. Terms
+  approximation  逼近，对一个量的逐渐接近
+  default argument  默认参数，该参数具有默认值，调用函数时可以不输入该参数
+  function  函数，
+  lambda  用来构造匿名函数，用在临时需要使用一次该函数的地方
+  scaling  缩放，将数据按同一比例调整到某一范围
+  screen layout  屏幕布局，在屏幕上显示的内容相对位置
