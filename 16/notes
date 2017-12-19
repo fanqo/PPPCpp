@@ -1,0 +1,38 @@
+1. 02.cpp 中red, blue, black按钮不起作用，03.cpp 中却可以
+2. Review
+  1. GUI 允许用户通过点击按钮，选择菜单，输入数据等方式与程序进行交互，这是和电脑、网页打交道经常用的方式
+  2. 当输入输出只是文本时可不需要GUI
+  3. software layer 软件层？
+  4. 使用软件层可将硬件与具体的使用隔离开来，使同一功能的不同实现发生改变时只需改动很少现有的接口
+  5. 由C++与操作系统交流时的问题是，操作系统不知道C++，不能理解C++的便利特性
+  6. 反馈是指针对用户的操作，系统使得应用作出反应
+  7. widget 是指在窗口中见到，并有动作与之关联的东西
+  8. Microsoft 又将 widget 叫作 control
+  9. FLTK 是指 Fast Light Toolkit
+  10. FLTK 读作 fulltick
+  11. 其它的一些 GUI toolkits 有 wxWidget, GTK, QT？
+  12. Microsoft 喜欢将 widget 这一术语表示的东西叫 control
+  13. Button，In_box 都是 widget
+  14. 使用 inbox 来输入数据给程序
+  15. 存放在 inbox 中的数据类型是字符串？感觉所有的输入都应该是字符串
+  16. 为了将点击左键触发反馈可使用 button
+  17. 为了将一组 button 放在一起可使用 menu
+  18. 一般情况下是应用调用函数提示用户该怎么做，而control inversion 是指用户先做动作，使得系统给应用一个反馈
+  19. 调试 GUI 程序最基本的策略是，你看到的就是你运行得到的结果，看起来不正常的地方就是应该找问题的地方
+  20. 调试 GUI 程序比调试一般程序困难在于：a. 不容易追踪程序的执行；b. 可能将一个窗口放在了另一个窗口之上，看起来就只有一个窗口；c. 抛出的异常可能看不到
+3. Terms
+  button 是一个widget，表现为有标签的长方形
+  callback 当点击一个button，会触发一个callback，该callback将button与一些函数联系起来
+  console I/O 在终端运行输入输出
+  control widget的另一种叫法
+  control inversion 用户先产生动作，从而使得操作系统给应用一个反馈
+  dialog box 对话框，应用与用户运行交互的一种方式
+  GUI 图形用户界面
+  menu 是一个widget，像一组button的组合
+  software layer 软件层？用户与计算机硬件之间，用来处理用户与计算交互的层级？
+  user interface 用户界面，处理用户与计算机的交互
+  visible/hidden 不可见
+  waiting for input 等待输入
+  wait loop 应用中止运行而进行等待的过程
+  widget 屏幕上所有看到的且能做些事情的东西
+
