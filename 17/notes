@@ -1,0 +1,52 @@
+1. Review
+  1. 对于事先不确定长度的数组、列表等使用可变元素数目的结构比较合适。
+  2. 启动C++程序，编译器会为程序分配code storage(或叫做 text storage)，并为全局变量分配 static storage。调用函数时，为函数参数和局部变量分配 stack storage(或叫做 automatic storage)，刚有 free store 以供它用。
+  3. free store 又称为 heap，可以通过 new 操作符来使用。
+  4. dereference 操作符是*，可通过它对指针指向的内容进行读写。
+  5. 计算机的内存可看做一系列字节，可以将这一系列字节从0开始编号，该编号表示在内存中的位置，这个编号就称为地址。可通过 address of 操作符 & 取得对象的地址。
+  6. 指针包含它指向的对象的起始位置和类型，而不包含它指向的对象的大小。
+  7. 指针应该可以指向任何对象
+  8. 使用完内存后没有将其归还为 free store 就会导致 leak
+  9. 程序可以使用的，如文件、线程、内存等都是资源
+  10. 若对象有默认的 constructor，可自动初始化指向它的指针；或显示指定指针指向的内容来初始化指针；或将指针初始化为 nullptr
+  11. null pointer 是值为0的指针。当一个指针有时指向一个对象，有时又指向对象时就要使用 null pointer
+  12. 指针和引用的差别在于：1.对指针赋值改变的是指针的值而不是指针指向的对象的值；2.要使用 new 或 & 得到指针；3.使用 * 或 [] 来访问指针指向的对象；4.对引用赋值改变的是被引用的对象的值，而不是引用本身的值；5.一经初始化，就不能改变引用或指向的被引用对象。对对象的引用相当于为对象取个别名，引用必须要初始化。所以不知道要指向的具体内容时用指针可能会好些。
+  13. destructor 是 constructor 的相反面。当超出某一对象的作用域时，隐式地调用该对象的 destructor，以确保该对象被消除之前已经清理过。
+  14. 如果类有虚函数，就需要使用虚的 destructor。
+  15. 若类的成员有 destructor，该对象消除时调用该成员的 destructor，类成员的 destructor 由派生类的 destructor 隐式地调用。
+  16. cast 是类型转换，确实需要类型转换时才用。
+  17. 指向对象的指针，可由操作符 -> 来访问其成员函数。
+  18. double-linked list 是一种表，给定一个链接，既可以找到它前面的链接也可以找到它后面的链接。
+  19. this 是一个指针，它指向被调用成员函数的对象（指向一个对象，其成员函数被调用），当需要使用整个对象时使用它。
+2. Terms
+  address  将内存看作一系列字节，将这些字节从0开始编号，这些编号代表了在内存中的位置，称为地址
+  address of: &  取地址操作，取得对象的地址
+  allocation  从 free store 中取得一个地址
+  cast  类型转换
+  container  容器，如 vector, list, map, string 等
+  contents of: *  取得指针指向的内容
+  deallocation  将内存归还给 free store
+  delete  将单个对象占用的内存归还 free store
+  delete[]  将一组对象占用的内存归还 free store
+  dereference  同 contents of 操作，取得指针指向的内容
+  destructor  当对象不在作用域时，自动调用的函数，以确保对象消除前正确地清理
+  free store  潜在可用的内存
+  link  链接？
+  list  表，由链接组成
+  member access: ->  由指向对象的指针访问对象的成员
+  member destructor  成员的 destructor
+  memory  内存
+  memory leak  使用过的内存未被正确释放
+  new  从 free store 中分配地址，返回一个指针
+  null pointer  空指针，其值为0
+  nullptr  C++中的空指针
+  pointer  指针，存有对象的起始地址
+  range  对象的范围
+  resource leak  文件、线程等未被正确释放？
+  subscripting  下标
+  subscript: []  下标操作，下标从0开始，取得相应地址的值
+  this  调用某一对象的成员函数时，指向对象本身
+  type conversion  类型转换
+  virtual destructor  虚析构函数，若类有虚函数，其析构函数应为虚析构函数
+  void*  指向编译器不其指向的类型的指针
+
