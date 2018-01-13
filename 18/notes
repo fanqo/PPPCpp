@@ -1,0 +1,124 @@
+1. 02.cpp 运行时出现错误: pointer being freed was not allocated
+2. 04.cpp 运行时，v2 的大小为3（与v同），并出现错误:  
+      pointer being freed was not allocated
+3. 08.cpp 运行结果显示于 08.out 文件中，各语句对应的输出如下：
+      X golb(2);             ==>  0x109dc7188->X(int): 2 (2)
+   该语句对应构造函数 X(int)，相当于将 int 转换为 X
+      X loc {4};             ==>  0x7fff55e3bad8->X(int): 4 (4)
+   该语句对应构造函数 X(int)，相当于将 int 转换为 X
+      X loc2 {loc};          ==>  0x7fff55e3bad0->X(X&): 4 (4)
+   该语句对应 copy constructor，将 loc 的 val 值拷贝给 loc2
+      loc = X {5};           ==>  0x7fff55e3bac0->X(int): 5 (5)
+                                  0x7fff55e3bad8->X::operator=(): 4 (5)
+                                  0x7fff55e3bac0->~X(): 5 (0)
+   首先由 X(int) 函数创建临时变量，将临时变量的值由 copy assignment 赋给 loc，最后将临
+时变量占用的资源释放掉
+      loc2 = copy(loc);      ==>  0x7fff55e3bab0->X(X&): 4 (4)
+                                  0x7fff55e3bab8->X(X&): 4 (4)
+                                  0x7fff55e3bad0->X::operator=(): 4 (4)
+                                  0x7fff55e3bab8->~X(): 4 (0)
+                                  0x7fff55e3bab0->~X(): 4 (0)
+   首先由 loc 的值创建临时变量并返回临时变量的值，以返回的临时变量的值再创建一临时变量，并
+将其值由 copy assignment 赋给 loc2，然后先释放掉第二个临时变量占用的资源，最后释放掉第一
+个临时变量占用的资源
+      loc2 = copy2(loc);     ==>  0x7fff55e3baa0->X(X&): 4 (4)
+                                  0x7fff55e3baa8->X(X&): 4 (4)
+                                  0x7fff55e3bad0->X::operator=(): 4 (4)
+                                  0x7fff55e3baa8->~X(): 4 (0)
+                                  0x7fff55e3baa0->~X(): 4 (0)
+   X aa = a; 对应第一个 X(X&)，以 aa 的返回值创建一临时变量，并将该临时变量的值由 copy 
+assignment 赋给 loc2，然后先释放掉临时变量的资源，再释放掉 aa 的资源
+      X loc3 {6};            ==>  0x7fff55e3ba98->X(int): 6 (6)
+   该语句对应构造函数 X(int)，相当于将 int 转换为 X
+      X& r = ref_to(loc);  
+   该语句没有对应的输出信息，即没有调用任何构造函数，引用只是起个別名
+      delete make(7);        ==>  0x7fff55e3b998->X(int): 7 (7)
+                                  0x7f960cc02610->X(X&): 7 (7)
+                                  0x7fff55e3b998->~X(): 7 (0)
+                                  0x7f960cc02610->~X(): 7 (0)
+   make 函数中 X a(i); 对应 X(int)，而 new X(a) 由 X(X&) 创建一临时指针，释放资源的顺
+序不太能理解
+      delete make(8);        ==>  0x7fff55e3b998->X(int): 8 (8)
+                                  0x7f960cc02610->X(X&): 8 (8)
+                                  0x7fff55e3b998->~X(): 8 (0)
+                                  0x7f960cc02610->~X(): 8 (0)
+   参照上 delete make(7);
+      vector<X> v(4);        ==>  0x7f960cc02610->X(): 8 (0)
+                                  0x7f960cc02614->X(): -2147483648 (0)
+                                  0x7f960cc02618->X(): 0 (0)
+                                  0x7f960cc0261c->X(): -2147483648 (0)
+   连续调用4次 default constructor 以创建4个 X， v(4) 中的4应是对 vector 来说， v 是
+一个 vector  
+      XX loc4;               ==>  0x7fff55e3ba70->X(): 1440987888 (0)
+                                  0x7fff55e3ba74->X(): 32767 (0)
+   XX 中 X a; X b; 分别对应一个 X()
+      X* p = new X{9};       ==>  0x7f960cc02620->X(int): 9 (9)
+   new X{9}; 对应 X(int)，从侧面证明 make 函数中 new X(a); 对应 X(X&)
+      delete p;              ==>  0x7f960cc02620->~X(): 9 (0)
+   释放 p 占用的资源
+      X* pp = new X[5];      ==>  0x7f960cc02638->X(): 0 (0)
+                                  0x7f960cc0263c->X(): -2147483648 (0)
+                                  0x7f960cc02640->X(): -215154674 (0)
+                                  0x7f960cc02644->X(): 32767 (0)
+                                  0x7f960cc02648->X(): -372999125 (0)
+   new 创建5个连续的 X，每个 X 由 X() 创建
+      delete[]  pp;          ==>  0x7f960cc02648->~X(): 0 (0)
+                                  0x7f960cc02644->~X(): 0 (0)
+                                  0x7f960cc02640->~X(): 0 (0)
+                                  0x7f960cc0263c->~X(): 0 (0)
+                                  0x7f960cc02638->~X(): 0 (0)
+   释放 pp 占用的资源，释放的顺序与创建的顺序相反
+   程序运行结束会将资源释放掉，10个 ~X() 的对应关系为：
+      loc4    ==>  0x7fff55e3ba74->~X(): 0 (0)
+                   0x7fff55e3ba70->~X(): 0 (0)
+      v       ==>  0x7f960cc0261c->~X(): 0 (0)
+                   0x7f960cc02618->~X(): 0 (0)
+                   0x7f960cc02614->~X(): 0 (0)
+                   0x7f960cc02610->~X(): 0 (0)
+      loc3    ==>  0x7fff55e3ba98->~X(): 6 (0)
+      loc2    ==>  0x7fff55e3bad0->~X(): 4 (0)
+      loc     ==>  0x7fff55e3bad8->~X(): 4 (0)
+      golb    ==>  0x109dc7188->~X(): 2 (0)
+   释放资源的顺序与创建时的顺序相反
+4. Review
+  1. "Caveat emptor!" 意思是“买主购物自行小心”
+  2. 默认情况下对对象的拷贝是拷贝对象的所有数据成员，对指针成员拷贝的指针，而不是其指向的
+内容
+  3. 一般情况下，默认的拷贝是合适的，但对于有指针成员的对象来说，因拷贝的是指针，拷贝变成
+了共享，就不太合适了
+  4. copy constructor 用于初始化时的拷贝, 其参数是对被拷贝对象的引用。
+  5. copy assignment 用于赋值时的拷贝，其参数为对被拷贝对象的引用。
+  6. copy assignment 用于赋值时，而 copy initialization 用于初始化时。copy 
+assignment 比 copy initialization 复杂一些，要对旧元素进行处理。
+  7. shallow copy 只拷贝指针，两指针指向同样的对象； deep copy 拷贝指针指向的内容，两指
+针指向不同的对象。
+  8. vector 的拷贝是拷贝了 vector 的大小和元素，所以拷贝具有和源相同的大小和元素，但指向
+元素的指针是不同的
+  9. 类的七种基本操作为：1. 一个或多个参数的 constructor； 2. 默认 constructor； 
+3. copy constructor； 4. copy assignment； 5. move constructor； 6. move 
+assignment； 7. destructor
+  10. explicit constructor 不使用隐式转换，只提供通常的构造语义；当隐式转换不适合时使用
+  11. 当构造函数只有一个参数时，构造函数定义由该参数到类的转换，这是一个隐式的转换
+  12. array 指分配在连续内存中的一系列同类型的对象
+  13. 可使用 for 循环、 memcpy() 或 copy() 对 array 进行拷贝
+  14. character array 可由字符串来初始化，所有 array 和其元素类型相同的列表来初始化
+  15. reference 不能更改其指向的对象，若要更改指向的对象时可能 pointer 更合适
+  16. C-style string 是以 ’\0’ 结尾的字符 array
+  17. palindrome，回文，正着看和倒着看字母的顺序相同，如 level
+5. Terms
+  array  分配在连续内存中的一系列同类型的对象
+  array initialization  数组初始化
+  copy assignment  用于赋值时的拷贝，其参数为对被拷贝对象的引用
+  copy constructor  用于初始化时的拷贝, 其参数是对被拷贝对象的引用
+  deep copy  拷贝到值
+  default constructor  没有参数的构造函数
+  essential operations  1. 一个或多个参数的 constructor； 2. 默认 constructor； 
+3. copy constructor； 4. copy assignment； 5. move constructor； 6. move 
+assignment； 7. destructor
+  explicit constructor  为了防止意外的转换，将一个参数的构造函数定义为 explicit，是为
+explicit constructor
+  move assignment  移出参数的值，并将参数置空
+  move construction  将变量的值置空，得到参数的值，并将参数置空
+  palindrome  回文
+  shallow copy  只拷贝到指针
+
