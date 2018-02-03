@@ -1,0 +1,49 @@
+1. 03.cpp 使用 clang++ (Apple LLVM version 9.0.0 (clang-900.0.39.2)) 编译时出现
+错误：
+  unknown type name 'vector'
+而使用 g++ (g++-6 6.3.0) 编译没有问题
+2. Review
+  1. 事先不清楚要输入的数据的大小，vector 的大小若是固定的，则给小了不够用，给大了又浪费空间，所以希望 vector 的大小是可改变的
+  2. 不同的 vector 其包含的数据类型是可以不一样的，如有可能是数字，有可能是字符串，有可能是 shape 等等，所以要不同的类型，也就对应不同的 vector 元素
+  3. 分配足够的空间往往就意味着分配极大量的空间，以致不能承受
+  4. 对于一个新的 vector 并没有多预留出空间， free space 为零
+  5. 当新要分配的空间大于当前 vector 的总空间容量时要将元素拷贝至新地址
+  6. push_back()， resize() 通过调用 reserve() 来改变 vector 的大小
+  7. vector 被拷贝后其值不变，执行拷贝操作的 vector 得到被拷贝 vector 的值，而不拷贝其 free space
+  8. vector(const vector&); 和 vector& operator=(const vector&); 分别定义了拷贝和拷贝赋值
+  9. 对一个类进行拷贝的默认意思是拷贝其所有数据成员
+  10. template 是一种机制，它可以允许将类型作为类或函数的参数
+  11. template 最有用的两种参数类型为类型（typename）和整型（int）
+  12. 泛型编程是指可将不同的类型当作参数来编写代码
+  13. 泛型编程将类型作为参数来实现多态，而面向对象编程使用类继承和虚函数来实现多态
+  14. 见19.3.5，array 的大小在编译时已知，更有效率
+  15. 见19.3.5，built-in array 不知道其大小，不能合适地拷贝等
+  16. reserve() 用来和内存打交道，而 resize() 调用 reserve() 来处理 vector 的大小
+  17. resource 是指可获得并能释放的事物，如memory, locks, file handles ...
+  18. resource leak 是指资源未被正确释放
+  19. RAII 是指 Resource Acquisition Is Initialization，资源获取就是初始化，它关注的主要是资源泄漏的问题
+  20. unique_ptr 在自身销毁时会将其指向的对象销毁掉，使用它就不用再使用 try, catch 来捕获异常以防止资源泄漏
+3. Terms
+  #define  宏替换，#define a b 将 a 当作 b 来用，实际代码中用 a，编译器将其替换为 b
+  at()  具有越界检查的访问操作
+  basic guarantee  成功运行或在没有资源泄漏的前提下抛出异常
+  exception  异常
+  guarantees  具有三种不同类型： the basic guarantee，保证成功运行或在无资源泄漏的前提下抛出异常； the strong guarantee，在保证 basic guaratee 前提下，对函数而言所有可见值在出现错误后仍保持为函数调用前的值； the no-throw guarantee，不抛出异常，C++ 所有内置功能均能保证
+  handle  句柄，对释放资源负有责任的对象，又称 owner
+  instantiation  给定类模板模板参数以生成类型类称为 specialization 或 template instantiation
+  macro  宏
+  owner  对释放资源负有责任的对象，又称 handle
+  push_back()  向 vector 中增加一个元素
+  RAII  资源获取即初始化
+  resize()  修改 vector 的大小
+  resource  资源，可获取并且要返还的事物
+  re-throw  在 catch 中使用 throw; 将异常再次抛出
+  self-assignment  将自身赋值给自己
+  shared_ptr  既保证删除又可被拷贝的指针
+  specialization  同 instantiation
+  strong guarantee  见 guarantees
+  template  模板，一种机制，在这种机制下可将类型作为类或函数的参数
+  template parameter  模板参数，一般为类型，或整型
+  this  对任何成员函数，this 是指向成员函数调用的对象的指针
+  throw  抛出，给出异常
+  unique_ptr  可保证删除的指针
