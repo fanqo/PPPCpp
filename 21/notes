@@ -1,0 +1,67 @@
+1. Review
+  1. 标准库包含大约80种算法，如find, find_if, count, count_if, sort, copy, 
+unique_copy, merge, equal_range, equal, accumulate, inner_product等
+  2. find() 具有三个参数，分别为区间iterator [b:e)，以及要查找的值 v，其返回值为一   
+iterator，指向 v 第一次出现的位置
+  3. count_if() 有三个参数，分别为区间iterator [b:e)，以及预测p，其返回值为预测为真的数目
+  4. sort(b,e) 默认使用 < 来进行排序
+  5. 算法的输入序列由一对iterator指定
+  6. 算法的输出为指向输出序列第一个元素的iterator
+  7. 算法由返回输入序列的end() iterator来指示出错或未找到
+  8. 函数对象是定义了 () 操作符的类的对象
+  9. 函数对象的行为像函数，通常函数对象的运行要快一些，与函数的显著区别是函数对象可以包含数据
+  10. predicate 是返回 true 或 false 的函数
+  11. accumulate() 有两种形式， T accumulate(In first, In last, T init) 给定初始值
+init，将 [first:last) 中所有值加到初始值上，返回总和； T accumulate(In first, In last,
+T init, BinOp op) 给定初始值 init，将 init 与 [first:last) 中的每一元素通过二元运算符
+op 运算后再赋给 init， int = op(int, *first); 最后返回 init
+  12. inner_product() 有两种形式， T inner_product(In first, In last, In2 first2,
+T init) 给定初始值 init，将 [first:last) 内的元素对应与以 first2 开始的元素相乘后与 init
+作和并赋给 init，最后返回 init；T inner_product(In first, In last, In2 first2, 
+T init, BinOp op, BinOp2, op2) 给定初始值 init，将 [first:last) 内元素与以 first2 开
+头的序列中元素通过 op2 作用后再通过 op 与 init 作用并赋给 init，最后返回 init
+  13. associative container 是指具有 (key, value) 对的序列，可通过 key 来访问 value，
+如 map，set，unordered_map，multiset等
+  14. list 不是 associative container，因为它不具有 (key, value) 这样的数据结构
+  15. binary tree 基本的顺序为：对每一个节点 1. 其左侧子节点的 key 要小于该节点的 key； 
+2. 其右侧子节点的 key 要大于该节点的 key
+  16. 树的平衡指的是与根距离相同的子树大约含有同样多的子节点数目
+  17. map 的 element 具有 pair<, > 的类型，占有两个空间
+  18. vector 的 element 占用一个空间
+  19. 相对于 map， unordered_map 是一个 hash 表， 可以更快地查询值
+  20. set 相当于没有值的 map (只有 key)
+  21. mutimap 中同一个 key 可以出现多次
+  22. copy 操作本身可以检查是否有足够的空间以供操作？
+  23. binary search 是指每次搜索都将被搜索的数据(数据已排序)分成两份，比较中间的值来确定再
+需要搜索的部分，重复
+2. Terms
+  accumulate()  一种算法，具有两种形式 accumulate(b,e,i) 和 accumulate(b,e,i,op)
+  algorithm  算法，用来处理数据
+  application:()  应用？
+  associative container  关联容器，具有一系列 (key, value) 对的容器
+  balanced tree  平衡树，该种树中与根距离相同的子树大约含有同样多的子节点数目
+  binary_search()  二分搜索，每次搜索都将被搜索的数据(数据已排序)分成两份，比较中间的值来确定再
+需要搜索的部分，重复
+  copy()  一种算法，其格式为 copy(b,e,b2) 将 [b:e) 拷贝至 [b2:b2+(e-b))
+  copy_if()  格式为 copy_if(b,e,b2,p) 将 [b:e) 中满足预测 p 的元素拷贝至 [b2:b2+(e-b))
+  equal_range()  格式为 equal_range(b,e,v) 从 [b:e) 中取出值为 v 的子序列
+  find()  格式为 find(b,e,v) 从 [b:e) 中找到第一次出现 v 的位置
+  find_if()  格式为 find_if(b,e,p)，指向 [b:e) 中使得 p 为真的第一个元素
+  function object  其行为像函数的对象
+  generic  说一个算法 generic，是说它可用于不同的数据类型
+  hash function  可将整数或字符串映射为vector的index
+  inner_product()  算法的一种，有两种形式，可指定运算
+  lambda  没有名字的函数，可用在需要函数做参数的地方
+  lower_bound()  指向序列中等于某值的第一个元素
+  map  具有 (key, value) 对元素的有序容器
+  predicate  是返回 true 或 false 的函数
+  searching  搜索
+  sequence  序列
+  set  包含有序 key 说容器
+  sort()  将序列排序
+  sorting  排序
+  stream iterator  输入、输出的 iterator
+  unique_copy()  拷贝时不拷贝相邻的相同元素
+  unordered_map  无序 (key, value) 对容器
+  upper_bound()  指向序列中大于某值的第一个元素
+
