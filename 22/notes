@@ -1,0 +1,104 @@
+1. Review
+  1. 越了解历史越不易被一些似是而非的观念所迷惑；历史可以提供一些思想和理想
+  2. 编程语言的作用：告诉机器怎么做；表示算法；程序员之前进行交流；做试验；操纵可被计算机操纵的
+设备；表达概念之间的关系
+  3. 编程语言应该具有的性质有：可移植性；类型是安全的；定义是精确的；高性能；可以简洁地表达思想；
+方便除错；方便测试；可以访问所有的系统资源；与平台无关；可在所有平台上运行；长期稳定；可根据应用
+领域的不同快速改进；便于学习；小；支持常见的编程风格；方便分析程序；具有多种工具；用户群大；鼓励
+新用户；为高级用户提供全面的工具；具有较多软件开发工具；具有较多软件开发组件；受到开放软件社区的
+支持；受到主要厂商的支持
+  4. 抽象意味着通用；高级的抽象意味着对问题和解决的描述更接近人类的想法而不是接近计算机硬件
+  5. 理想的代码要：直接用代码表达思想；独立地用代码表达独立的思想；直接用代码表达思想之间的联系；
+可将代码表达的思想自由地组合
+  6. 高级编程的优势：不用直接和硬件打交道；代码可维护性高；代码重用性高
+  7. reuse 是指代码模块可用在多个程序中；这样就可以使用经过测试的代码
+  8. procedural programming 是指由函数通过参数来组成程序，如对数学函数 sqrt(), sin() 的
+使用
+  9. data abstraction 是指首先提供可以处理该领域问题的数据类型，再使用该类型来编写程序，如先
+提供 Matrix, vector 数据类型，再编写程序表达线性代数中的运算  
+  10. object-oriented programming 是指将数据类型分级，并直接用代码表达它们之间的关系，如
+Circle 是一个 Shape  
+  11. generic programming 是指将具体的算法抽象化，在不改变其本质的情况下通过参数来处理不同
+的数据，如 STL 中的 find(), sort() 算法  
+  12. multi-paradigm programming 是指编写程序时的风格不只一种，多种风格混合
+  13. David Wheeler 在1949年写出了运行在 stored-program computer 上的第一个真正的程序
+"table of squares" 程序  
+  14. David Wheeler 写出了在 stored-program 电脑上第一个程序；属于首先写出编译器的一批人；
+发明了函数调用；发表了如何设计函数库的论文；是第一本编程书籍的合作者；是计算机领域第一个博士  
+  15. John Backus 领导定义并实现了 Fortran，这是第一个高级编程语言
+  16. Grace Murray Hopper 设计的第一个语言是 FLOW-MATIC，该语言直接影响了 COBOL
+  17. John McCarthy 主要工作的领域为 AI
+  18. Peter Naur 对 Algol60 的贡献是和 Edsger Dijkstra 领导一个小组实现了 Algol60
+  19. Edsger Dijkstra 对 Algol 做出了开创性的贡献，成为 THE 操作系统的一个设计者和实现者，
+并写出了著名的 "Go-To Statement Considered Harmful"  
+  20. Niklaus Wirth 设计并实现的语言为 Algol W， PL/360， Euler， Pascal， Modula，
+Modula-2，Oberon， Oberon-2， Lola  
+  21. Anders Hejlsberg 设计的语言为 Turbo Pascal， Delphi， C#
+  22. Jean Ichbiah 在 Ada 项目中的作用是领导设计了 Ada
+  23. Simula 引导了 object-oriented programming 编程风格
+  24. Kristen Nygaard 在 mid-1970s 工作于 Aarhus 大学计算机科学系
+  25. Ole-Johan Dahl 与 Kristen Nygaard 共同开发了 Simula67
+  26. Ken Thompson 与 Dennis Ritchie 共同开发了 Unix 系统， Ken Thompson 是主要设计者？
+  27. Doug McIlroy 是一个评论家，讨论者，具有许多的想法
+  28. Brian Kernighan 最出名的书是 "The C Programming Language"
+  29. Dennis Ritchie 工作于 Bell 实验室 Computer Science Research Center 40 多年
+  30. Bjarne Stroustrup 设计并实验了 C++
+  31. Alex Stepanov 使用 C++ 设计了 STL
+  32. 文中没有讨论到的语言有(22.2.7图以外) Ruby, Erlang, Scheme, Go, Swift, Rust, R,
+Haskell, D, Lua, Shell  
+  33. Scheme 是 Lisp 的方言
+  34. C++ 最主要的两个原型为 C 和 Simula 67
+  35. C++ 名字中 C 表示 C 语言
+  36. Fortran 名字来自于 Formula Translation
+  37. COBOL 名字来自于 The Common Business-Oriented Language
+  38. Lisp 名字来自于 List Processing
+  39. Pascal 名字来自于法国数学家、哲学家、物理学家 Blaise Pascal
+  40. Ada 名字来自于 Augusta Ada Lovelace
+  41. 没有哪一种语言是最好的，不同的人或不同的应用使用不同的语言，所有主流系统都可使用多种语言
+2. Terms
+  Ada 编程语言，名称来自于 Augusta Ada Lovelace， 由 Jean Ichbiah 领导设计
+  Algol 编程语言，名称来自于 "Algorithmic Language"， Algol60 由 Peter Naur 和 
+Edsger Dijkstra 领导的小组实现
+  BCPL 编程语言，Basic CPL，由Martin Richards 完成
+  C 编程语言，由 Dennis Ritchie 设计并实现
+  C++ 编程语言，由 Bjarne Stroustrup 设计并实现
+  COBOL 编程语言，"The Common Business-Oriented Language"
+  Fortran 编程语言，"Formula Translation"， 由 John Backus 领导的小组定义并实现
+  Lisp 编程语言，"List Processing"，由 John McCarthy 设计
+  Pascal 编程语言，由 Niklaus Wirth 设计并实现
+  Scheme 编程语言，Lisp 的一种方言
+  Simula 编程语言，由 Kristen Nygaard 和 Ole-Johan Dahl 开发
+  
+  Charles Babbage 剑桥大学 Lucasian 数学教授
+  John Backus  领导小组定义并实现了 Fortran
+  Ole-Johan Dahl 与 Kristen Nygaard 共同开发了 Simula67
+  Edsger Dijkstra 对 Algol 做出了开创性的贡献，成为 THE 操作系统的一个设计者和实现者
+  Anders Hejlsberg 与他人一起创建了 Borland， 设计并实现了 Turbo Pascal
+  Grace Murray Hopper 设计了FLOW-MATIC，该语言直接影响了 COBOL
+  Jean Ichbiah 领导设计了 Ada
+  Brain Kernighan 程序员，杰出作家，写出了著名的 "The C Programming Language"
+  John McCarthy 设计了 Lisp
+  Doug McIlroy 是一个评论家，讨论者
+  Peter Naur 和 Edsger Dijkstra 领导一个小组实现了 Algol60
+  Kristen Nygaard 与 Ole-Johan Dahl 开发了 Simula
+  Dennis Ritchie 设计并实现了 C
+  Alex Stepanov 使用 C++ 设计了 STL
+  Bjarne Stroustrup 设计并实现了 C++
+  Ken Thompson 与 Dennis Ritchie 共同开发了 Unix 系统
+  David Wheeler 写出了在 stored-program 电脑上第一个程序
+  Niklaus Wirth 设计并实现了 Pascal
+  
+  Bell Laboratories 贝尔实验室
+  Borland Borland Software Corporation
+  Cambridge University (England) 剑桥大学
+  ETH (Swiss Federal Technical University) Zurich 联邦理工学院
+  IBM The International Business Machines Corporation
+  MIT 麻省理工学院
+  Norwegian Computer Center 挪威计算机中心
+  Princeton University 普林斯顿大学
+  Stanford University 斯坦福大学
+  Technical University of Copenhagen Copenhagen技术大学
+  U.S. Department of Defense 美国国防部
+  U.S. Navy 美国海军
+  
+  
