@@ -1,0 +1,45 @@
+1. Review
+  1. 随时随地都在处理文本，书、屏幕上的文本、源代码等都是
+  2. 最常用的文本处理标准库有 iostream, string, map, vector, fstream ...
+  3. s.insert(pos,x) 在 s[pos] 前插入 x
+  4. Unicode 为统一地处理字符编码而发展出的标准
+  5. 字符串与其它类型之间的转换可由 stringstream 实现
+  6. cin >> s 与 getline(cin, s) 之间的差别在于 getline 以换行符间隔字符串，而 cin 以
+空白字符间隔  
+  7. 标准流有 iostream, stringstream, fstream
+  8. map 中的元素为 <key, value> 对，key 的类型可为 sting， int 等
+  9. map 中元素的迭代可由 for ( auto e : m ) 来完成
+  10. map 与 multimap 的区别在于 multimap 中同一个 key 可出现多次，所以不能通过 key 取得
+value 的值  
+  11. forward iterator 要能递增，即 ++
+  12. empty 是指搜索中匹配主模式，子模式不存在，子模式是空的， nonexistent 是指匹配不到任何
+东西
+  13. 转义字符的存在由于其自身的意义发生了变化，不能再表示原来的意义
+  14. 正则表达是即是一个字符串
+  15. \w+\s\d{4} 表示一个或多个字符(包括字母，数字，下划线)后面跟一个空格(包括space, tab
+等)再跟4个数字，如： 23 1234, kdj 3456, _ 7654等；可由 R"(\w+\s\d{4})" 来初始化该正则
+变量
+  16. 正则表达式(字符串)不合法或太过于复杂，会抛出异常 regex_error，可由此来判断字符串是否
+为有效的正则表达式
+  17. regex_search() 搜索匹配正则表达式的行
+  18. regex_match() 要匹配所有字符
+  19. 正则表达式中 . 要由 \. 来匹配
+  20. 至少三个可表示为： {3,} 、 \w\w\w+、 \w\w\w\w* 等
+  21. \w 包含字母、数字、下划线，所以 7 是\w， _也是\w
+  22. 大写字母由 \u 表示
+  23. 可由[]来定义字符集合
+  24. 整数可表示为 [1-9]\d*
+  25. 浮点数可表示为 (\d*\.\d+|\d+\.\d*)
+  26. 提取浮点数可用 regex_search 或 regex_match 取得一 smatch, 由该 smatch 下标得到
+  27. sub-match 是指正则表达式中 () 之间的部分，可由 smatch 下标得到
+2. Terms
+  match  匹配，字符串符合正则表达式
+  multimap  是一种 map，同一个 key 可出现多次
+  pattern  模式，正则表达式表示的内容
+  regex_match()  完整匹配正则表达式
+  regex_search()  匹配正则表达式的一部分
+  regular expression  正则表达式
+  search  搜索
+  smatch  是一个 vector，含有对字符串的部分匹配
+  sub-pattern  子模式，正则表达式中 () 部分
+  
